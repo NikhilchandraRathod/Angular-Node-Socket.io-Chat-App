@@ -1,0 +1,53 @@
+
+.row
+    .col-lg-12
+        .page-header
+            h2 Welcome {{currentUser}} to Awesome Chat, Enjoy!!!
+                span.label.label-primary.label-username.pull-right
+                    a(data-ng-click="logout()") 
+                        span.glyphicon.glyphicon-log-out 
+                        |  Logout
+            
+.row
+    .col-lg-9.col-md-9.col-sm-9
+        
+        .panel.panel-default.panel-chat
+            .panel-heading
+                span.glyphicon.glyphicon-comment
+                |  Chat Room
+            .panel-body
+                #chat
+                    .chat-msg-wrap(data-ng-repeat="chat in chats", data-ng-class="{ 'chat-private-msg': chat.isPrivate, 'chat-error-msg': chat.isError, 'chat-other-msg': chat.isOther }")
+                        span(data-ng-class="{ 'chat-msg-other': chat.isOther, 'chat-msg': !chat.isOther }") {{chat.msg}}
+                        div
+                            span.badge.chat-user {{chat.name}}
+                        
+        form(name="chatform",data-ng-submit="postMsg()")
+            .input-group
+                input.form-control(type="text", data-control-focus="{{isFocus}}", data-ng-model="newMsg", name="newMsg", required)
+                .input-group-btn
+                    button.btn.btn-info(type="submit", data-ng-disabled="chatform.$invalid") Send
+        
+        .info
+            span.span
+            |  General Message &nbsp;&nbsp;
+            span.span.private
+            |  Private Message &nbsp;&nbsp;
+            span.span.error
+            |  Error Message &nbsp;&nbsp; 
+            span.glyphicon.glyphicon-hand-right
+            |  For send private msg click on username or use "\P name " command &nbsp;&nbsp;
+        
+        
+    .col-lg-3.col-md-3.col-sm-3
+        .panel.panel-default.panel-user
+            .panel-heading
+                span.glyphicon.glyphicon-user
+                |  Online Users
+            #users.list-group
+                a.list-group-item(data-ng-repeat="user in users",data-ng-click="privateMsg(user)",style="background: {{user.color}}")
+                    span.glyphicon.glyphicon-stop.icon-online-user
+                    |  {{user}}
+         
+         
+       

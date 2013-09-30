@@ -1,0 +1,21 @@
+doctype 5
+html(data-ng-app="ChatApp")
+  head
+    title= title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/todc-bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .container
+        block content
+        
+    script(src="/javascripts/jquery/jquery-2.0.3.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/angular/angular.js")
+    script(src="/javascripts/angular/angular-route.js")
+    script(src="/javascripts/angular/angular-animate.js")
+    script(src="/javascripts/app/app.js")
+    script(src="/javascripts/app/directives/controlFocus.js")
+    script(src="/javascripts/app/services/SocketService.js")
+    script(src="/javascripts/app/controllers/LoginCtrl.js")
+    script(src="/javascripts/app/controllers/ChatCtrl.js")

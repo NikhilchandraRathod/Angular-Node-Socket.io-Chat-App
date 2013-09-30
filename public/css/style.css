@@ -1,0 +1,129 @@
+.badge-login{
+    margin-top:12px;
+}
+#chat{
+    height:390px;
+    overflow-y:auto;
+}
+.chat-wrap{
+    display:none;
+}
+
+
+.chat-msg-wrap{
+    display:block;
+    margin-right:15px;
+}
+
+.chat-msg,
+.chat-msg-other{
+    padding:4px 8px;
+    position:relative;
+    background:#3498db;
+    color:#fff;
+    display:inline-block;
+}
+
+.chat-msg-wrap.chat-private-msg .chat-msg,
+.chat-msg-wrap.chat-private-msg .chat-msg-other{
+     background:#e67e22;
+}
+
+.chat-msg-wrap.chat-error-msg .chat-msg,
+.chat-msg-wrap.chat-error-msg .chat-msg-other{
+     background:#e74c3c;
+}
+
+.chat-other-msg{
+    text-align:right;
+}
+.chat-msg-other:before{
+    content: '';
+    position:absolute;
+    bottom:-6px;
+    border-top:6px solid #3498db;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    right:10px;
+}
+.chat-msg:before{
+    content: '';
+    position:absolute;
+    bottom:-6px;
+    border-top:6px solid #3498db;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    left:10px;
+}
+
+.chat-msg-wrap.chat-private-msg .chat-msg:before,
+.chat-msg-wrap.chat-private-msg .chat-msg-other:before{
+    border-top:6px solid #e67e22;
+}
+.chat-msg-wrap.chat-error-msg .chat-msg:before,
+.chat-msg-wrap.chat-error-msg .chat-msg-other:before{
+    border-top:6px solid #e74c3c;
+}
+
+.chat-user{
+    margin-bottom:6px;
+    margin-top:11px;
+    margin-left:5px;
+}
+
+
+.panel-chat{
+    border-color:#1abc9c;
+}
+.panel-chat .panel-heading{
+    background:#1abc9c;
+    border-color:#1abc9c;
+    color:#fff;
+}
+
+.panel-user{
+    border-color:#9b59b6;
+}
+.panel-user .panel-heading{
+    background:#9b59b6;
+    border-color:#9b59b6;
+    color:#fff;
+}
+
+.label-username{
+    background:#34495e;
+    color:#fff;
+}
+.label-username a {
+    color:#fff;
+    text-decoration:none;
+    cursor:pointer;
+}
+#error-user,
+#log-out{
+    display:none;
+}
+
+.info {
+    background:#16a085;
+    color:#fff;
+    display:block;
+    padding:5px;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+.span{
+    width:11px;
+    height:11px;
+    display:inline-block;
+    background:#333333;
+}
+.span.error{
+    background:#e74c3c;
+}
+.span.private{
+    background:#e67e22;
+}
+.icon-online-user{
+    color:#27ae60;
+}
