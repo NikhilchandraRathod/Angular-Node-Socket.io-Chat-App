@@ -69,6 +69,7 @@ angular.module("ChatApp.Services")
             
             socket.on("Private", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
+                    msg.time = new Date().timeNow();
                     $rootScope.chats.push(msg);
                     socketObj.blinkWindowTitle("New Private Msg from: " + msg.name);
                 });
@@ -76,12 +77,14 @@ angular.module("ChatApp.Services")
             
             socket.on("Private Own", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
+                    msg.time = new Date().timeNow();
                     $rootScope.chats.push(msg);
                 });
             });
             
             socket.on("New Msg", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
+                    msg.time = new Date().timeNow();
                     $rootScope.chats.push(msg);
                     socketObj.blinkWindowTitle("New Msg from: " + msg.name);
                 });
@@ -89,6 +92,7 @@ angular.module("ChatApp.Services")
             
             socket.on("New Own Msg", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
+                    msg.time = new Date().timeNow();
                     $rootScope.chats.push(msg);
                 });
             });

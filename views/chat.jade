@@ -20,7 +20,7 @@
                     .c-m-w(data-ng-repeat="chat in chats", data-ng-class="{ 'c-p-m': chat.isPrivate, 'c-e-m': chat.isError, 'c-o-m': chat.isOther, 'c-ow-m': !chat.isOther }")
                         span.c-m-w-i
                             span.c-m {{chat.msg}}
-                            span.c-u - {{chat.name}} ( {{chat.time}} )
+                            span.c-u - {{chat.name}} ( {{ chat.time }} )
 
                         
         form(name="chatform",data-ng-submit="postMsg()")

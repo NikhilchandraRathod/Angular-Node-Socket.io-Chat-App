@@ -45,16 +45,16 @@ exports.initialize = function(server){
                 if(user in users){
                     msg = S(msg.substring(msg.indexOf(" "))).trim().s;
                     callback(true);
-                    users[user].emit("Private",{ name: socket.userName, msg: msg, isPrivate: true, isError: false, isOther: true, time: new Date().timeNow() });
-                    users[socket.userName].emit("Private Own",{ name: socket.userName + " → " + user, msg: msg, isPrivate: true, isError: false, isOther: false, time: new Date().timeNow() });
+                    users[user].emit("Private",{ name: socket.userName, msg: msg, isPrivate: true, isError: false, isOther: true });
+                    users[socket.userName].emit("Private Own",{ name: socket.userName + " → " + user, msg: msg, isPrivate: true, isError: false, isOther: false });
                 }else{
                     callback(false);
-                    users[socket.userName].emit("Private Own",{ name: socket.userName, msg: "Invalid UserName", isPrivate: false, isError: true, isOther: false, time: new Date().timeNow() });
+                    users[socket.userName].emit("Private Own",{ name: socket.userName, msg: "Invalid UserName", isPrivate: false, isError: true, isOther: false });
                 }
             }else{user
                 callback(true);
-                socket.broadcast.emit("New Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: true, time: new Date().timeNow() });
-                users[socket.userName].emit("New Own Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: false, time: new Date().timeNow() });
+                socket.broadcast.emit("New Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: true });
+                users[socket.userName].emit("New Own Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: false });
             }
         });
         
