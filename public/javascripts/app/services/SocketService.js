@@ -3,8 +3,13 @@ angular.module("ChatApp.Services")
         "$rootScope",
         "$q",
         "$location",
-        function($rootScope, $q, $location){
+        "$window",
+        "$document",
+        function($rootScope, $q, $location, $window, $document){
             var socket = io.connect();
+            var original_title = $document.context.title;
+            var window_focus = false;
+            var flash_title_timer;
             
             var socketObj = {
                 newUser: function(userName){
@@ -28,8 +33,32 @@ angular.module("ChatApp.Services")
                         deferred.resolve(status);
                     });
                     return deferred.promise;
+                },
+                blinkWindowTitle: function(msgToBlink){
+                    if(!window_focus){
+                        clearInterval(flash_title_timer);
+                        flash_title_timer = setInterval(function(){
+                            if($document.context.title === original_title){
+                                $document.context.title = msgToBlink;
+                            }else{
+                                $document.context.title = original_title;
+                            }
+                        },1000);
+                    }
                 }
             };
+            
+            $($window).on("focus", function(){
+                window_focus = true;
+                clearInterval(flash_title_timer);
+                $rootScope.$safeApply($rootScope,function(){
+                    $document.context.title = original_title;
+                });
+            });
+            
+            $($window).on("blur", function(){
+                window_focus = false;
+            });
             
             socket.on("JustConnected", function(){
                 $rootScope.$safeApply($rootScope,function(){
@@ -40,10 +69,24 @@ angular.module("ChatApp.Services")
             socket.on("Private", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
                     $rootScope.chats.push(msg);
+                    socketObj.blinkWindowTitle("New Private Msg from: " + msg.name);
+                });
+            });
+            
+            socket.on("Private Own", function(msg){
+                $rootScope.$safeApply($rootScope,function(){
+                    $rootScope.chats.push(msg);
                 });
             });
             
             socket.on("New Msg", function(msg){
+                $rootScope.$safeApply($rootScope,function(){
+                    $rootScope.chats.push(msg);
+                    socketObj.blinkWindowTitle("New Msg from: " + msg.name);
+                });
+            });
+            
+            socket.on("New Own Msg", function(msg){
                 $rootScope.$safeApply($rootScope,function(){
                     $rootScope.chats.push(msg);
                 });

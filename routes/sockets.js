@@ -39,12 +39,12 @@ exports.initialize = function(server){
                     users[socket.userName].emit("Private",{ name: socket.userName, msg: msg, isPrivate: true, isError: false, isOther: false });
                 }else{
                     callback(false);
-                    users[socket.userName].emit("Private",{ name: socket.userName, msg: "Invalid UserName", isPrivate: false, isError: true, isOther: false });
+                    users[socket.userName].emit("Private Own",{ name: socket.userName, msg: "Invalid UserName", isPrivate: false, isError: true, isOther: false });
                 }
             }else{
                 callback(true);
                 socket.broadcast.emit("New Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: true });
-                users[socket.userName].emit("New Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: false });
+                users[socket.userName].emit("New Own Msg", { name: socket.userName, msg: msg, isPrivate: false, isError: false, isOther: false });
             }
         });
         
