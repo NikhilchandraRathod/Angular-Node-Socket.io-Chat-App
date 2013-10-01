@@ -17,10 +17,11 @@
                 |  Chat Room
             .panel-body
                 #chat
-                    .chat-msg-wrap(data-ng-repeat="chat in chats", data-ng-class="{ 'chat-private-msg': chat.isPrivate, 'chat-error-msg': chat.isError, 'chat-other-msg': chat.isOther }")
-                        span(data-ng-class="{ 'chat-msg-other': chat.isOther, 'chat-msg': !chat.isOther }") {{chat.msg}}
-                        div
-                            span.badge.chat-user {{chat.name}}
+                    .c-m-w(data-ng-repeat="chat in chats", data-ng-class="{ 'c-p-m': chat.isPrivate, 'c-e-m': chat.isError, 'c-o-m': chat.isOther, 'c-ow-m': !chat.isOther }")
+                        span.c-m-w-i
+                            span.c-m {{chat.msg}}
+                            span.c-u - {{chat.name}}
+
                         
         form(name="chatform",data-ng-submit="postMsg()")
             .input-group
