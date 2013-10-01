@@ -5,7 +5,8 @@ angular.module("ChatApp.Services")
         "$location",
         "$window",
         "$document",
-        function($rootScope, $q, $location, $window, $document){
+        "$timeout",
+        function($rootScope, $q, $location, $window, $document, $t){
             var socket = io.connect();
             var original_title = $document.context.title;
             var window_focus = false;
@@ -51,9 +52,9 @@ angular.module("ChatApp.Services")
             $($window).on("focus", function(){
                 window_focus = true;
                 clearInterval(flash_title_timer);
-                $rootScope.$safeApply($rootScope,function(){
+                $t(function(){
                     $document.context.title = original_title;
-                });
+                },100); 
             });
             
             $($window).on("blur", function(){
